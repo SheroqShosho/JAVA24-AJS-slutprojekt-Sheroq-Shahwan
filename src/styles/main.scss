@@ -1,0 +1,558 @@
+// Moderna färgvariabler
+$primary-color: #6c5ce7;  // Mjuk lila
+$secondary-color: #a29bfe; // Ljus lila
+$accent-color: #fd79a8;    // Rosa accent
+$success-color: #00b894;   // Mintgrön
+$danger-color: #e84393;    // Djup rosa
+$light-color: #f8f9fa;
+$dark-color: #2d3436;      // Mörk gråblå
+$background-color: #f1f2f6;
+$card-bg: #ffffff;
+$border-radius: 12px;
+$box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+$transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+$disabled-color: #b2b2b2;  // Ny gråfärg för inaktiva knappar
+
+// Gradienter
+$primary-gradient: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+$success-gradient: linear-gradient(135deg, $success-color 0%, #55efc4 100%);
+
+// Basstilar med förbättrad typografi
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: $dark-color;
+  background-color: $background-color;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+// Dashboard med modern design
+.dashboard {
+  margin-top: 30px;
+  background: $card-bg;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: $primary-gradient;
+  }
+}
+
+// Förbättrade flikar
+.tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  
+  button {
+    padding: 12px 24px;
+    margin-right: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: $transition;
+    position: relative;
+    font-size: 15px;
+    
+    &:hover {
+      color: $primary-color;
+    }
+    
+    &.active {
+      color: $primary-color;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: $primary-gradient;
+        border-radius: 3px 3px 0 0;
+      }
+    }
+  }
+}
+
+// Moderna formulär med uppdaterade knappar
+form {
+  background: $card-bg;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  
+  div {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: lighten($dark-color, 20%);
+    font-size: 14px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;
+    font-size: 15px;
+    transition: $transition;
+    background: $light-color;
+    
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      background: white;
+    }
+  }
+  
+  // Nya stilar för att ändra knappfärg när input har värde
+  .form__group {
+    &:has(input:not(:placeholder-shown)),
+    &:has(select:valid) {
+      ~ .form__button {
+        background: $primary-gradient;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba($primary-color, 0.2);
+      }
+    }
+  }
+  
+  .form__button {
+    background: $disabled-color;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: $transition;
+    width: 100%;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover::after {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Förbättrad Task Board
+.task-board {
+  background: $card-bg;
+  padding: 30px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  
+  .filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    
+    select {
+      padding: 12px 15px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: $border-radius;
+      font-size: 14px;
+      min-width: 200px;
+      background-color: $light-color;
+      transition: $transition;
+      
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      }
+    }
+  }
+  
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Lyft upp Task Column
+.task-column {
+  background: $card-bg;
+  padding: 25px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: $transition;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: $dark-color;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    span {
+      background: $primary-gradient;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+  
+  .tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+// Förfinade Task Cards med hover-effekter
+.task-card {
+  background: $card-bg;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+  transition: $transition;
+  border-left: 4px solid $primary-color;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    
+    &::before {
+      opacity: 0.1;
+    }
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $primary-gradient;
+    opacity: 0;
+    transition: $transition;
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  h4 {
+    margin-bottom: 12px;
+    color: $dark-color;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  
+  p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: lighten($dark-color, 20%);
+    
+    strong {
+      color: $dark-color;
+      font-weight: 500;
+    }
+  }
+  
+  button {
+    margin-top: 15px;
+    padding: 12px 15px;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-weight: 600;
+    transition: $transition;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+    
+    &:hover::after {
+      transform: translateX(0);
+    }
+  }
+  
+  .complete-btn {
+    background: $success-color;
+    
+    &:hover {
+      background: darken($success-color, 5%);
+    }
+  }
+  
+  .delete-btn {
+    background: $danger-color;
+    
+    &:hover {
+      background: darken($danger-color, 5%);
+    }
+  }
+  
+  .assign-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: $border-radius;
+      font-size: 14px;
+      transition: $transition;
+      background: $light-color;
+      
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      }
+    }
+    
+    button {
+      background: $primary-gradient;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      
+      &:hover {
+        box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+      }
+      
+      &:disabled {
+        background: $disabled-color;
+        transform: none !important;
+        box-shadow: none !important;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Notification med animation
+.notification {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  padding: 18px 25px;
+  border-radius: $border-radius;
+  color: white;
+  z-index: 1000;
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  &::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  &.success {
+    background: rgba($success-color, 0.9);
+    
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    }
+  }
+  
+  &.error {
+    background: rgba($danger-color, 0.9);
+    
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/%3E%3C/svg%3E");
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+// Responsiv design
+@media (max-width: 768px) {
+  .app {
+    padding: 20px;
+  }
+  
+  .dashboard {
+    padding: 20px;
+    
+    &::before {
+      width: 3px;
+    }
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    
+    button {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+  
+  .task-board {
+    padding: 20px;
+    
+    .filters {
+      flex-direction: column;
+      gap: 10px;
+      
+      select {
+        width: 100%;
+      }
+    }
+  }
+  
+  .task-column {
+    padding: 20px;
+  }
+}
+
+// Animationer
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-card {
+  animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: 0.1s * $i;
+    }
+  }
+}
+
+// Ladda in Inter-font från Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');

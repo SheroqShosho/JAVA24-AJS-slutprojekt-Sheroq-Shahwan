@@ -3,7 +3,7 @@ import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
-    <BrowserRouter basename='/JAVA24-AJS-slutprojekt-Sheroq-Shahwan'>
+    <BrowserRouter>
       <div className="app">
         <Routes>
           <Route path="/" element={<Dashboard />} />

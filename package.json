@@ -1,7 +1,7 @@
 {
   "name": "parcel",
   "version": "1.0.0",
-  "homepage": "https://github.com/SheroqShosho/JAVA24-AJS-slutprojekt-Sheroq-Shahwan.git",
+  "homepage": "https://sheroqshosho.github.io/JAVA24-AJS-slutprojekt-Sheroq-Shahwan/",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",

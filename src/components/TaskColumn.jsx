@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-const TaskColumn = ({ title, tasks, members = [], onAssign, onComplete, onDelete, showCategory, showMember }) => {
-  const [selectedMember, setSelectedMember] = useState('');
 
+const TaskColumn = ({ title, tasks, members = [], onAssign, onComplete, onDelete, showCategory, showMember }) => {
+const [selectedMember, setSelectedMember] = useState('');
+
+  // Filtrera uppgifter baserat på status
   return (
     <div className="task-column">
       <h3>{title} ({tasks.length})</h3>
@@ -69,4 +71,5 @@ const TaskColumn = ({ title, tasks, members = [], onAssign, onComplete, onDelete
   );
 };
 
+// Definiera prop-typer för TaskColumn-komponenten
 export default TaskColumn;

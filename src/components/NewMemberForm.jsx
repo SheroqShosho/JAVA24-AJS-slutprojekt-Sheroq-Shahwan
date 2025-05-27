@@ -2,15 +2,20 @@ import { useState } from 'react';
 import { ref, push, set } from 'firebase/database';
 import { database } from '../services/firebase';
 
+// Definiera NewMemberForm-komponenten
 const NewMemberForm = () => {
+  // State för att hantera formulärdata
   const [name, setName] = useState('');
   const [category, setCategory] = useState('ux');
   
+  // Hantera formulärinlämning
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Referens till 'members' i Firebase-databasen
     const membersRef = ref(database, 'members');
     const newMemberRef = push(membersRef);
-    
+    // Sätt värdena för det nya medlemmen
     set(newMemberRef, {
       name,
       category
@@ -22,6 +27,7 @@ const NewMemberForm = () => {
     });
   };
 
+  // Rendera formuläret
   return (
     <form onSubmit={handleSubmit} className='form'>
       <h2 className='form__title'>Add New Team Member</h2>
@@ -49,4 +55,5 @@ const NewMemberForm = () => {
   );
 };
 
+// Exportera NewMemberForm-komponenten som standardexport
 export default NewMemberForm;

@@ -2,15 +2,19 @@ import { useState } from 'react';
 import { ref, push, set } from 'firebase/database';
 import { database } from '../services/firebase';
 
+// Definiera NewTaskForm-komponenten
 const NewTaskForm = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('ux');
   
+  // Hantera formulärinlämning
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    // Referens till 'tasks' i Firebase-databasen
     const tasksRef = ref(database, 'tasks');
     const newTaskRef = push(tasksRef);
     
+    // Sätt värdena för den nya uppgiften
     set(newTaskRef, {
       title,
       category,
@@ -25,6 +29,7 @@ const NewTaskForm = () => {
     });
   };
 
+  // Rendera formuläret
   return (
     <form onSubmit={handleSubmit} className='form'>
       <h2 className='form__title'>Add New Task</h2>
@@ -56,4 +61,5 @@ const NewTaskForm = () => {
   );
 };
 
+// Exportera NewTaskForm-komponenten som standardexport
 export default NewTaskForm;

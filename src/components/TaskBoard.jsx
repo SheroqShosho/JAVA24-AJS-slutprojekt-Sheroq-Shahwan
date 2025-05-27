@@ -3,6 +3,7 @@ import { ref, onValue, update, remove } from 'firebase/database';
 import { database } from '../services/firebase';
 import TaskColumn from './TaskColumn';
 
+// Definiera TaskBoard-komponenten
 const TaskBoard = () => {
   const [tasks, setTasks] = useState([]);
   const [members, setMembers] = useState([]);
@@ -12,6 +13,7 @@ const TaskBoard = () => {
   });
   const [sortOption, setSortOption] = useState('newest');
 
+  // Hämta uppgifter och medlemmar från Firebase-databasen
   useEffect(() => {
     const tasksRef = ref(database, 'tasks');
     const unsubscribeTasks = onValue(tasksRef, (snapshot) => {
@@ -23,6 +25,7 @@ const TaskBoard = () => {
       setTasks(tasksList);
     });
 
+    // Hämta medlemmar från Firebase-databasen
     const membersRef = ref(database, 'members');
     const unsubscribeMembers = onValue(membersRef, (snapshot) => {
       const membersData = snapshot.val();
@@ -33,12 +36,14 @@ const TaskBoard = () => {
       setMembers(membersList);
     });
 
+    // Rensa upp prenumerationer när komponenten avmonteras
     return () => {
       unsubscribeTasks();
       unsubscribeMembers();
     };
   }, []);
 
+  // Hantera uppgiftsåtgärder
   const handleAssignTask = (taskId, memberId) => {
     const taskRef = ref(database, `tasks/${taskId}`);
     update(taskRef, {
@@ -47,6 +52,7 @@ const TaskBoard = () => {
     });
   };
 
+  // Hantera slutförande av uppgifter
   const handleCompleteTask = (taskId) => {
     const taskRef = ref(database, `tasks/${taskId}`);
     update(taskRef, {
@@ -54,6 +60,7 @@ const TaskBoard = () => {
     });
   };
 
+  // Hantera radering av uppgifter
   const handleDeleteTask = (taskId) => {
     if (window.confirm('Är du säker på att du vill radera denna uppgift?')) {
       const taskRef = ref(database, `tasks/${taskId}`);
@@ -61,12 +68,14 @@ const TaskBoard = () => {
     }
   };
 
+  // Filtrera och sortera uppgifter baserat på valda filter och sorteringsalternativ
   const filteredTasks = tasks.filter(task => {
     const categoryMatch = filters.category === 'all' || task.category === filters.category;
     const memberMatch = filters.member === 'all' || task.member === filters.member;
     return categoryMatch && memberMatch;
   });
 
+  // Sortera uppgifter baserat på valt sorteringsalternativ
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     if (sortOption === 'newest') return b.createdAt - a.createdAt;
     if (sortOption === 'oldest') return a.createdAt - b.createdAt;
@@ -75,10 +84,12 @@ const TaskBoard = () => {
     return 0;
   });
 
+  // Dela upp uppgifter i olika kolumner baserat på deras status
   const newTasks = sortedTasks.filter(task => task.status === 'new');
   const inProgressTasks = sortedTasks.filter(task => task.status === 'in-progress');
   const finishedTasks = sortedTasks.filter(task => task.status === 'finished');
 
+  // Rendera TaskBoard-komponenten
   return (
     <div className="task-board">
       <div className="filters">
@@ -142,4 +153,5 @@ const TaskBoard = () => {
   );
 };
 
+// Exportera TaskBoard-komponenten som standardexport
 export default TaskBoard;

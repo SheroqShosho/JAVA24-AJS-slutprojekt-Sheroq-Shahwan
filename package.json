@@ -1,10 +1,13 @@
 {
   "name": "parcel",
   "version": "1.0.0",
+  "homepage": "https://github.com/SheroqShosho/JAVA24-AJS-slutprojekt-Sheroq-Shahwan.git",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "clean": "del-cli dist"
+    "clean": "del-cli dist",
+    "predeploy": "npm run clean && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.14.4",
     "del-cli": "^6.0.0",
+    "gh-pages": "^6.3.0",
     "parcel": "^2.14.4",
     "process": "^0.11.10"
   },

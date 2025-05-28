@@ -24,7 +24,7 @@ const [selectedMember, setSelectedMember] = useState('');
                 >
                   <option value="">Välj medlem</option>
                   {members
-                    .filter(member => member.category === task.category)
+                    .filter(member => member.category === task.category) // kontrollerar att member kategori matchar uppgiftens kategori
                     .map(member => (
                       <option key={member.id} value={member.id}>
                         {member.name}

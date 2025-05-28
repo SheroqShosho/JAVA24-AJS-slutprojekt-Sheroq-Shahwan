@@ -45,9 +45,9 @@ const NewMemberForm = () => {
       <div className='form__group'>
         <label className='form__label'>Role:</label>
         <select value={category} onChange={(e) => setCategory(e.target.value)} className='form__select'>
-          <option value="UX">UX Designer</option>
-          <option value="Frontend">Frontend Developer</option>
-          <option value="Backend">Backend Developer</option>
+          <option value="ux">UX Designer</option>
+          <option value="frontend">Frontend Developer</option>
+          <option value="backend">Backend Developer</option>
         </select>
       </div>
       <button type="submit" className='form__button'>Add Member</button>
